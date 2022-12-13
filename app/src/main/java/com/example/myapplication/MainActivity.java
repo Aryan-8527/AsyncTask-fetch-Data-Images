@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
         GetData getData = new GetData();
         getData.execute();
-
     }
 
     private class GetData extends AsyncTask<String , String , String> {
@@ -50,17 +49,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            Log.d("Aryan", "onPreExecute: ");
             progressDialog = new ProgressDialog(MainActivity.this);
             progressDialog.setMessage("Load Some Data ..!!!");
             progressDialog.setTitle("Please Wait");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
-
         @Override
         protected String doInBackground(String... strings) {
             Log.d("Aryan", "doInBackground: ");
-
             String current = " ";
             try {
                 URL url ;
@@ -78,15 +76,12 @@ public class MainActivity extends AppCompatActivity {
                     while (data!= -1) {
                         current += (char) data;
                         data = inputStreamReader.read();
-                        System.out.println(current);
                     }
                         return  current;
 
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
-                }finally {
+                } finally {
                     if (urlConnection != null)
                         urlConnection.disconnect();
                 }
@@ -98,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            Log.d("Aryan", "onPostExecute: ");
             super.onPostExecute(s);
+            Log.d("Aryan", "onPostExecute: ");
             progressDialog.dismiss();
             try {
                 JSONObject jsonObject = new JSONObject(s);

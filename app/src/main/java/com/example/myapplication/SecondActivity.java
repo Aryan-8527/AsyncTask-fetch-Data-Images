@@ -35,7 +35,12 @@ public class SecondActivity extends AppCompatActivity {
 
                                  //for Image View show//
         String imagev = bundle.getString("image");
-        Glide.with(this).load(imagev).into(image_views);
+
+        Glide
+                .with(this)
+                .load(imagev)
+                .placeholder(R.mipmap.ic_launcher_round)
+                .into(image_views);
 
         text_view_title.setText(tvtitle);
         text_view_details.setText(tvdetails);
